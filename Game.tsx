@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { State } from 'react-native-gesture-handler';
-import Doodler from './doodler';
+import Doodler from './Doodler';
 
 export default class Game extends React.Component {
 
@@ -24,8 +24,10 @@ export default class Game extends React.Component {
 
     render() {
         return (
+            <>
             <View style={styles.grid}/>
             <Doodler x={this.state.doodler.x} y={this.state.doodler.y} />
+            </>
         );
     }
 };

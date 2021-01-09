@@ -4,6 +4,7 @@ import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import * as FaceDetector from 'expo-face-detector';
 import Mask from './Mask'
+import MaskImage from './MaskImage'
 
 export default class CameraScreen extends React.Component {
   constructor(props) {
@@ -52,7 +53,7 @@ export default class CameraScreen extends React.Component {
             <View style={styles.container}>
             <Camera 
               style={styles.camera} 
-              type={Camera.Constants.Type.back}
+              type={Camera.Constants.Type.front}
               faceDetectorSettings={{
                 mode: FaceDetector.Constants.Mode.fast,
                 detectLandmarks: FaceDetector.Constants.Landmarks.all,
@@ -62,7 +63,7 @@ export default class CameraScreen extends React.Component {
               onFaceDetectionError={this.onFaceDetectionError}
             />
             { 
-              faces.map(face => <Mask key={faces.faceID} face={face} />)
+              faces.map(face => <MaskImage key={faces.faceID} face={face} />)
             }
           </View>
         )
