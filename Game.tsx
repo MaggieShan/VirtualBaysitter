@@ -17,7 +17,6 @@ export default class Game extends React.Component {
         }
     }
 
-
     function createPlatforms() {
         for(let i=0; i < platformCount; i++) {
             let platGap = 600 / platformCount
