@@ -1,31 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { State } from 'react-native-gesture-handler';
-import Doodler from './doodler';
 
-export default class Game extends React.Component {
-
-    state = {
-        platforms: [
-            {
-                x: 100,
-                y: 100
-            },
-            {
-                x: 150,
-                y: 150
-            }
-        ],
-        doodler: {
-            x: 100,
-            y: 50
-        }
-    };
-
+export default class Doodler extends React.Component {
     render() {
         return (
-            <View style={styles.grid}/>
-            <Doodler x={this.state.doodler.x} y={this.state.doodler.y} />
+            <View style={{
+                width: 60,
+                height: 80,
+                backgroundColor: 'rgb(247, 247, 239)',
+                left: this.props.x,
+                top: this.props.y
+            }}/>
         );
     }
 };
