@@ -52,7 +52,7 @@ export default class CameraScreen extends React.Component {
             <View style={styles.container}>
             <Camera 
               style={styles.camera} 
-              type={Camera.Constants.Type.front}
+              type={Camera.Constants.Type.back}
               faceDetectorSettings={{
                 mode: FaceDetector.Constants.Mode.fast,
                 detectLandmarks: FaceDetector.Constants.Landmarks.all,
