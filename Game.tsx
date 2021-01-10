@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { State } from 'react-native-gesture-handler';
 import Doodler from './Doodler';
 
@@ -73,12 +73,14 @@ export default class Game extends React.Component {
                     style={styles.leftButton}
                     onPressIn={this.startLeft}
                     onPressOut={this.stopLeft}
-                >LEFT</TouchableOpacity>
+                ><Text> LEFT</Text></TouchableOpacity>
                 <TouchableOpacity
                     style={styles.rightButton}
                     onPressIn={this.startRight}
                     onPressOut={this.stopRight}
-                >RIGHT</TouchableOpacity>
+                >
+                    <Text>RIGHT
+                        </Text></TouchableOpacity>
             </>
         );
     }
@@ -86,17 +88,20 @@ export default class Game extends React.Component {
 
 const styles = StyleSheet.create({
     grid: {
-        width: 400,
-        height: 600,
+        width: '100%',
+        height: '100%',
         backgroundColor: 'lightblue',
         position: 'relative', 
         fontSize: 200,
         textAlign: 'center',
     },
     leftButton: {
-
-    }
+        position: 'absolute',
+        paddingLeft: 10,
+    },
     rightButton: {
-
+        position: 'absolute',
+        padding: 10,
+        paddingTop: 20,
     }
   });

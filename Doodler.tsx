@@ -6,6 +6,7 @@ export default class Doodler extends React.Component {
     render() {
         return (
             <View style={{
+                position: 'absolute',
                 width: 60,
                 height: 80,
                 backgroundColor: 'rgb(247, 247, 239)',
