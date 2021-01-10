@@ -114,7 +114,7 @@ export default class Monitor extends React.Component {
     const styles = StyleSheet.create({
         container: {
           flex: 1,
-          backgroundColor: 'pink',
+          backgroundColor: '#F4EFEB',
         },
         camera: {
           flex: 1,

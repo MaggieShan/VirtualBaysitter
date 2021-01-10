@@ -35,7 +35,6 @@ const Mask = ({
         height: eyeWidth,
         borderWidth: eyeBorderWidth,
         borderColor: '#64C092',
-        
     });
 
     const containerStyle = (containerX, containerY) => ({
