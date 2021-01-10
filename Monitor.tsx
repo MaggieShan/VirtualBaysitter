@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions } from 'react-native';
 import { Camera } from 'expo-camera'; 
 import * as Permissions from 'expo-permissions';
 import * as FaceDetector from 'expo-face-detector';
 import { NavigationContainer } from '@react-navigation/native'
 import Mask from './Mask'
+import { sendSMS } from './Notif'
 
 export default class Monitor extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class Monitor extends React.Component {
     this.state = {
       hasCameraPermission: null,
       faces: [], 
+      timerID: null,
     }
     this.onCameraPermission = this.onCameraPermission.bind(this)
     this.onFacesDetected = this.onFacesDetected.bind(this)
@@ -29,8 +31,44 @@ export default class Monitor extends React.Component {
     }
 
     onFacesDetected({ faces }) {
-      console.log(faces)
+      // console.log(faces)
       this.setState({ faces })
+      this.isFaceOutside(faces)
+      
+      if (this.state.timerID) {
+        clearTimeout(this.state.timerID); 
+        this.setState({ timerID: null })
+      } 
+    }
+
+    isFaceGone() {
+      sendSMS();
+    }
+
+    isFaceOutside(faces) {
+      if (faces.length == 0) {
+        console.log("GONE GONE GONE");
+
+        if (this.state.timerID == null){ 
+          let timerID = setTimeout(this.isFaceGone, 5000);
+          this.setState({ timerID });
+        }
+        return;
+      }
+
+      const windowWidth = Dimensions.get('window').width;
+      const windowHeight = Dimensions.get('window').height;
+      const facePositionX = faces[0].bounds.origin.x;
+      const facePositionY = faces[0].bounds.origin.y;
+
+      if ((facePositionX < 0) || (facePositionX > windowWidth) || (facePositionY < 0) || (facePositionY > windowHeight)) {
+        console.log("WARNING ALSDKFJKADSJFDAKSLJFNKLSAJKJFAKSLJ")
+        return;
+      }
+    }
+
+    onFaceDetectionError(error) {
+      console.log(error)
     }
 
     onFaceDetectionError(error) {
@@ -80,8 +118,7 @@ export default class Monitor extends React.Component {
         },
         camera: {
           flex: 1,
-          width: 0,
-          height: 0,
+          opacity: 0, 
         },
         cameraContainer: {
           position: 'absolute', 

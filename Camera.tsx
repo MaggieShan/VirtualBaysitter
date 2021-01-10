@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, Image } from 'react-native';
 import { Camera } from 'expo-camera'; 
 import * as Permissions from 'expo-permissions';
 import * as FaceDetector from 'expo-face-detector';
 import { NavigationContainer } from '@react-navigation/native'
 import Mask from './Mask'
 import MaskImage from './MaskImage'
+import { sendSMS } from './Notif'
 
 export default class CameraScreen extends React.Component {
   constructor(props) {
@@ -30,8 +31,26 @@ export default class CameraScreen extends React.Component {
     }
 
     onFacesDetected({ faces }) {
-      console.log(faces)
+      // console.log(faces)
       this.setState({ faces })
+      this.isFaceOutside(faces)
+    }
+
+    isFaceOutside(faces) {
+      if(faces.length == 0) {
+        console.log("GONE GONE GONE");
+        return;
+      }
+
+      const windowWidth = Dimensions.get('window').width;
+      const windowHeight = Dimensions.get('window').height;
+      const facePositionX = faces[0].bounds.origin.x;
+      const facePositionY = faces[0].bounds.origin.y;
+
+      if ((facePositionX < 0) || (facePositionX > windowWidth) || (facePositionY < 0) || (facePositionY > windowHeight)) {
+        console.log("WARNING ALSDKFJKADSJFDAKSLJFNKLSAJKJFAKSLJ")
+        return;
+      }
     }
 
     onFaceDetectionError(error) {
@@ -68,6 +87,12 @@ export default class CameraScreen extends React.Component {
                 faces.map(face => <Mask key={faces.faceID} face={face} />)
               }
               </View>
+              
+                <Image style={styles.avatar1} source={require('./src/avatar1.png')}/>
+                <Text style={styles.label}>Stay still! </Text>
+                <Text style={styles.label1}>We're tracking your face </Text>
+                
+              
           </View>
         )
       }
@@ -77,46 +102,36 @@ export default class CameraScreen extends React.Component {
     const styles = StyleSheet.create({
         container: {
           flex: 1,
-          backgroundColor: 'pink',
+          backgroundColor: '#F4EFEB',
         },
         camera: {
           flex: 1,
         },
+        avatar1:{
+          position: 'absolute',
+          width: 250,
+          height: 100,
+          marginTop: '115%',
+          alignContent: 'flex-start'
+        },
         cameraContainer: {
           position: 'absolute', 
-          margin: '10%',
-          width: '80%',
+          marginTop: 0,
+          width: '100%',
           height: '70%',
+          borderRadius: 30
         },
-        face: {
-          padding: 10,
-          borderWidth: 2,
-          borderRadius: 2,
+        label: {
           position: 'absolute',
-          borderColor: '#FFD700',
-          justifyContent: 'center',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          marginTop: 650,
+          marginLeft: 70,
+          fontWeight: 'bold',
+          fontSize: 30
         },
-        facesContainer: {
+        label1: {
           position: 'absolute',
-          bottom: 0,
-          right: 0,
-          left: 0,
-          top: 0,
-        },
-        buttonContainer: {
-          flex: 1,
-          backgroundColor: 'transparent',
-          flexDirection: 'row',
-          margin: 20,
-        },
-        button: {
-          flex: 0.1,
-          alignSelf: 'flex-end',
-          alignItems: 'center',
-        },
-        text: {
-          fontSize: 18,
-          color: 'white',
-        },
+          marginTop: 690,
+          marginLeft: 70,
+          fontSize: 20
+        }
       });
