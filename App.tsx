@@ -6,6 +6,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import CameraScreen from './Camera';
 import Game from './Game';
+import Monitor from './Monitor';
+import Notif from './Notif';
 
 function HomeScreen({ navigation }) {
   return (
@@ -18,6 +20,14 @@ function HomeScreen({ navigation }) {
       <Button
         title="Game"
         onPress={() => navigation.navigate('Game')}
+      />
+      <Button
+        title="Monitor"
+        onPress={() => navigation.navigate('Monitor')}
+      />
+      <Button
+        title="Notif"
+        onPress={() => navigation.navigate('Notif')}
       />
     </>
   );
@@ -32,6 +42,8 @@ const App = () => {
         <Stack.Screen name="Home" component={HomeScreen}/>
         <Stack.Screen name="Camera" component={CameraScreen}/>
         <Stack.Screen name="Game" component={Game}/>
+        <Stack.Screen name="Monitor" component={Monitor}/>
+        <Stack.Screen name="Notif" component={Notif}/>
       </Stack.Navigator>
     </NavigationContainer>
   ); 

@@ -54,9 +54,3 @@ const Mask = ({
 };
 
 export default Mask
-
-const styles = StyleSheet.create({
-    container: {
-     
-    },
-  });

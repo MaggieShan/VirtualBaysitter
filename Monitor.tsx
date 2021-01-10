@@ -5,9 +5,8 @@ import * as Permissions from 'expo-permissions';
 import * as FaceDetector from 'expo-face-detector';
 import { NavigationContainer } from '@react-navigation/native'
 import Mask from './Mask'
-import MaskImage from './MaskImage'
 
-export default class CameraScreen extends React.Component {
+export default class Monitor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -81,12 +80,13 @@ export default class CameraScreen extends React.Component {
         },
         camera: {
           flex: 1,
+          width: 0,
+          height: 0,
         },
         cameraContainer: {
           position: 'absolute', 
-          margin: '10%',
-          width: '80%',
-          height: '70%',
+          width: '100%',
+          height: '100%',
         },
         face: {
           padding: 10,
