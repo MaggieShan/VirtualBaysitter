@@ -2,10 +2,11 @@ import React from 'react';
 import { Button, StyleSheet, Text,  } from 'react-native';
 import base64 from 'react-native-base64';
 
-const ACC_SID = 'ACa364c29e2ec20da27f62c3f2a19a42fe'
-const AUTH_TOKEN = '38dbaec8c445ee17b827a3590f0c6873'
-const FROM_NUM = '+13362213940'
-const TO_NUM = '+12892337522'
+// Updated to fillers for privacy 
+const ACC_SID = '**'
+const AUTH_TOKEN = '**'
+const FROM_NUM = '+##'
+const TO_NUM = '+##'
 
 export function sendSMS() {
   var form = new FormData();
